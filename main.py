@@ -2,6 +2,7 @@ import sys
 
 import pygame as pg
 
+from map import Map
 from settings import FPS, RESOLUTION
 
 
@@ -10,9 +11,10 @@ class Game:
         pg.init()
         self.screen = pg.display.set_mode(RESOLUTION)
         self.clock = pg.time.Clock()
+        self.new_game()
 
     def new_game(self):
-        pass
+        self.map = Map(self)
 
     def update(self):
         pg.display.flip()
@@ -21,6 +23,7 @@ class Game:
 
     def draw(self):
         self.screen.fill("black")
+        self.map.draw()
 
     def check_events(self):
         for e in pg.event.get():
