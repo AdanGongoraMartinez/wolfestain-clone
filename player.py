@@ -3,17 +3,16 @@ import math
 import pygame as pg
 
 from settings import (
-    PLAYER_ANGLE,
-    PLAYER_POS,
-    PLAYER_ROT_SPEED,
-    PLAYER_SIZE_SCALE,
-    PLAYER_SPEED,
-    MOUSE_BORDER_LEFT,
-    MUOSE_BORDER_RIGHT,
-    HALF_WIDTH,
     HALF_HEIGH,
+    HALF_WIDTH,
+    MOUSE_BORDER_LEFT,
     MOUSE_MAX_REL,
     MOUSE_SENSITIVITY,
+    MUOSE_BORDER_RIGHT,
+    PLAYER_ANGLE,
+    PLAYER_POS,
+    PLAYER_SIZE_SCALE,
+    PLAYER_SPEED,
 )
 
 
@@ -66,7 +65,7 @@ class Player:
             self.y += dy
 
     def mouse_control(self):
-        mx, my = pg.mouse.get_pos()
+        mx, _ = pg.mouse.get_pos()
         if mx < MOUSE_BORDER_LEFT or mx > MUOSE_BORDER_RIGHT:
             pg.mouse.set_pos([HALF_WIDTH, HALF_HEIGH])
         self.rel = pg.mouse.get_rel()[0]
