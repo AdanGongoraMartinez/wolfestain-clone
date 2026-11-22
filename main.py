@@ -1,10 +1,11 @@
-from raycasting import RayCasting
 import sys
 
 import pygame as pg
 
 from map import Map
+from object_renderer import ObjectRenderer
 from player import Player
+from raycasting import RayCasting
 from settings import FPS, RESOLUTION
 
 
@@ -19,6 +20,7 @@ class Game:
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
+        self.object_renderer = ObjectRenderer(self)
         self.raycasting = RayCasting(self)
 
     def update(self):
@@ -30,6 +32,7 @@ class Game:
 
     def draw(self):
         self.screen.fill("black")
+        self.object_renderer.draw()
         # self.map.draw()
         # self.player.draw()
 
