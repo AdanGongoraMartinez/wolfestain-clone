@@ -12,6 +12,7 @@ from settings import FPS, RESOLUTION
 class Game:
     def __init__(self):
         pg.init()
+        pg.mouse.set_visible(False)
         self.screen = pg.display.set_mode(RESOLUTION)
         self.clock = pg.time.Clock()
         self.delta_time = 1

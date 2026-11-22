@@ -8,6 +8,12 @@ from settings import (
     PLAYER_ROT_SPEED,
     PLAYER_SIZE_SCALE,
     PLAYER_SPEED,
+    MOUSE_BORDER_LEFT,
+    MUOSE_BORDER_RIGHT,
+    HALF_WIDTH,
+    HALF_HEIGH,
+    MOUSE_MAX_REL,
+    MOUSE_SENSITIVITY,
 )
 
 
@@ -42,10 +48,10 @@ class Player:
 
         self.check_wall_collision(dx, dy)
 
-        if keys[pg.K_LEFT]:
-            self.angle -= PLAYER_ROT_SPEED * self.game.delta_time
-        if keys[pg.K_RIGHT]:
-            self.angle += PLAYER_ROT_SPEED * self.game.delta_time
+        # if keys[pg.K_LEFT]:
+        #     self.angle -= PLAYER_ROT_SPEED * self.game.delta_time
+        # if keys[pg.K_RIGHT]:
+        #     self.angle += PLAYER_ROT_SPEED * self.game.delta_time
 
         self.angle %= math.tau
 
@@ -58,6 +64,14 @@ class Player:
             self.x += dx
         if self.check_wall(int(self.x), int(self.y + dy * scale)):
             self.y += dy
+
+    def mouse_control(self):
+        mx, my = pg.mouse.get_pos()
+        if mx < MOUSE_BORDER_LEFT or mx > MUOSE_BORDER_RIGHT:
+            pg.mouse.set_pos([HALF_WIDTH, HALF_HEIGH])
+        self.rel = pg.mouse.get_rel()[0]
+        self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
+        self.angle += self.rel * MOUSE_SENSITIVITY * self.game.delta_time
 
     def draw(self):
         # pg.draw.line(
@@ -74,6 +88,7 @@ class Player:
 
     def update(self):
         self.movement()
+        self.mouse_control()
 
     @property
     def pos(self):
